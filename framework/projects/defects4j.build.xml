@@ -209,15 +209,16 @@ project-specific build file ("project_id"/"project_id".build.xml) for the
         <fail message="Property major.kill.log not set!" unless="major.kill.log" />
 
         <!-- Sort test classes by run time, unless a single test method is run -->
-        <condition property="major.sort" value="original" else="sort_classes">
+        <condition property="major.sort" value="original" else="sort_methods">
             <isset property="test.entry.method"/>
         </condition>
 
         <echo message="Running mutation analysis ..."/>
         <junit
             printsummary="false"
-            showoutput="false"
+            showoutput="true"
             fork="no"
+            exportKillMap="true"
 
             mutationAnalysis="true"
             timeoutFactor="16"
